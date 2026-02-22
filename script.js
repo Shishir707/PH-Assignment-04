@@ -11,6 +11,7 @@ const allBtn = document.getElementById("all-btn");
 const interviewBtn = document.getElementById("interview-btn");
 const rejectedBtn = document.getElementById("rejected-btn");
 
+const deleteBtn = document.getElementById("delete-btn");
 
 const allJobs = document.getElementById("all-jobs");
 const jobsCount = document.getElementById("available-jobs-count");
@@ -36,6 +37,7 @@ function toggleButton(id) {
         interviewContent.classList.add("hidden");
         rejectedContent.classList.add("hidden");
         allJobs.classList.remove("hidden");
+        totalCount();
     } else if (id === "interview-btn") {
         interviewBtn.classList.add("bg-blue-500", "text-white");
         jobsCount.innerText = interviewList.length;
@@ -50,7 +52,7 @@ function toggleButton(id) {
         interviewContent.classList.add("hidden");
         rejectedContent.classList.remove("hidden");
         renderRejectedList();
-    }
+    } 
 }
 
 mainContent.addEventListener("click", function (event) {
@@ -77,6 +79,7 @@ mainContent.addEventListener("click", function (event) {
             rejectedList = rejectedList.filter(item => item.JobName !== jobInfo.JobName);
             totalCount();
             renderInterviewList();
+            renderRejectedList();
         }
     } else if (event.target.classList.contains("rejected-btn")) {
         const parentNode = event.target.parentNode;
@@ -103,6 +106,7 @@ mainContent.addEventListener("click", function (event) {
             interviewList = interviewList.filter(item => item.JobName !== jobInfo.JobName);
             totalCount();
             renderRejectedList();
+            renderInterviewList();
         }
     }
 });
@@ -175,6 +179,12 @@ function renderRejectedList() {
 document.addEventListener("click", function (event) {
     if (event.target.classList.contains("delete")) {
         const parentNode = event.target.parentNode.parentNode;
+        const state = parentNode.querySelector(".state").innerText;
+        if (state === "Interview") {
+            interviewList = interviewList.filter(item => item.JobName !== parentNode.querySelector(".job-name").innerText);
+        } else if (state === "Rejected") {
+            rejectedList = rejectedList.filter(item => item.JobName !== parentNode.querySelector(".job-name").innerText);
+        }
         parentNode.remove();
         totalCount();
     }
