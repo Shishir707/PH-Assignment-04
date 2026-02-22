@@ -32,8 +32,13 @@ function toggleButton(id) {
 
     if (id === "all-btn") {
         allBtn.classList.add("bg-blue-500", "text-white");
+        filterContent.classList.add("hidden");
+        allJobs.classList.remove("hidden"); 
     } else if (id === "interview-btn") {
         interviewBtn.classList.add("bg-blue-500", "text-white");
+        allJobs.classList.add("hidden");
+        filterContent.classList.remove("hidden");
+        renderInterviewList();
     } else if (id === "rejected-btn") {
         rejectedBtn.classList.add("bg-blue-500", "text-white");
     }
@@ -46,6 +51,7 @@ mainContent.addEventListener("click", function (event) {
         const JobTitle = parentNode.querySelector(".job-title").innerText;
         const WorkingHour = parentNode.querySelector(".working-hour").innerText;
         const Description = parentNode.querySelector(".description").innerText;
+        parentNode.querySelector(".state").innerText = "Interview";
         const state = "Interview";
 
         const jobInfo = {
