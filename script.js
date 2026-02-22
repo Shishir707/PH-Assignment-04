@@ -49,6 +49,7 @@ function toggleButton(id) {
         allJobs.classList.add("hidden");
         interviewContent.classList.add("hidden");
         rejectedContent.classList.remove("hidden");
+        renderRejectedList();
     }
 }
 
@@ -69,8 +70,6 @@ mainContent.addEventListener("click", function (event) {
             Description,
             state
         }
-
-        console.log(jobInfo);
 
         const existingJob = interviewList.find(item => item.JobName === jobInfo.JobName);
         if (!existingJob) {
@@ -97,8 +96,6 @@ mainContent.addEventListener("click", function (event) {
             Description,
             state
         }
-
-        console.log(jobInfo);
 
         const existingJob = rejectedList.find(item => item.JobName === jobInfo.JobName);
         if (!existingJob) {
@@ -135,10 +132,17 @@ function renderInterviewList() {
 
 function renderRejectedList() {
     rejectedContent.innerHTML = "";
-    for (let job of rejectedList) {
-        let jobElement = document.createElement("div");
-        jobElement.classList.add("mt-8", "p-4", "bg-white");
-        jobElement.innerHTML = `
+    console.log("No rejected jobs yet.");
+
+    if (rejectedList.length === 0) {
+        rejectedContent.innerHTML = "<p class='text-center text-gray-500'>No rejected jobs yet.</p>";
+        return;
+    }
+    else {
+        for (let job of rejectedList) {
+            let jobElement = document.createElement("div");
+            jobElement.classList.add("mt-8", "p-4", "bg-white");
+            jobElement.innerHTML = `
         <div class="title flex items-center justify-between mb-2">
                 <h3 class="job-name font-semibold text-blue-950">${job.JobName}</h3>
                 <button class="delete btn btn-soft btn-error"><i class="fa-solid fa-trash-can"></i></button>
@@ -150,7 +154,8 @@ function renderRejectedList() {
             <button class="interview-btn btn btn-dash btn-success">Interview</button>
             <button class="rejected-btn btn btn-dash btn-error">Rejected</button>
             `
-        rejectedContent.appendChild(jobElement);
+            rejectedContent.appendChild(jobElement);
+        }
     }
 }
 
