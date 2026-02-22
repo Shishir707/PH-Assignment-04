@@ -110,10 +110,18 @@ mainContent.addEventListener("click", function (event) {
 function renderInterviewList() {
     interviewContent.innerHTML = "";
 
-    for (let job of interviewList) {
-        let jobElement = document.createElement("div");
-        jobElement.classList.add("mt-8", "p-4", "bg-white");
-        jobElement.innerHTML = `
+    if (interviewList.length === 0) {
+        interviewContent.innerHTML = `
+        <div class="bg-white p-8 rounded-lg mt-8" id="no-jobs">
+            <img src="/assets/jobs.png" alt="No jobs" class="mx-auto mt-12 mb-2">
+            <h2 class="text-center text-2xl font-bold text-gray-700">No jobs available</h2>
+            <p class="text-center text-gray-500">Check back soon for new job opportunities</p>
+        </div>`
+    } else {
+        for (let job of interviewList) {
+            let jobElement = document.createElement("div");
+            jobElement.classList.add("mt-8", "p-4", "bg-white");
+            jobElement.innerHTML = `
         <div class="title flex items-center justify-between mb-2">
                 <h3 class="job-name font-semibold text-blue-950">${job.JobName}</h3>
                 <button class="delete btn btn-soft btn-error"><i class="fa-solid fa-trash-can"></i></button>
@@ -126,7 +134,8 @@ function renderInterviewList() {
             <button class="interview-btn btn btn-dash btn-success">Interview</button>
             <button class="rejected-btn btn btn-dash btn-error">Rejected</button>
          `
-        interviewContent.appendChild(jobElement);
+            interviewContent.appendChild(jobElement);
+        }
     }
 }
 
@@ -135,8 +144,12 @@ function renderRejectedList() {
     console.log("No rejected jobs yet.");
 
     if (rejectedList.length === 0) {
-        rejectedContent.innerHTML = "<p class='text-center text-gray-500'>No rejected jobs yet.</p>";
-        return;
+        rejectedContent.innerHTML = `
+        <div class="bg-white p-8 rounded-lg mt-8" id="no-jobs">
+            <img src="/assets/jobs.png" alt="No jobs" class="mx-auto mt-12 mb-2">
+            <h2 class="text-center text-2xl font-bold text-gray-700">No jobs available</h2>
+            <p class="text-center text-gray-500">Check back soon for new job opportunities</p>
+        </div>`
     }
     else {
         for (let job of rejectedList) {
