@@ -35,7 +35,10 @@
     </section>
 
     <section>
-        <h2 class="text-2xl font-bold p-4 text-blue-950">Available Jobs</h2>
+        <div class="flex items-center justify-between mt-8">
+            <h2 class="text-2xl font-bold py-4 text-blue-950">Available Jobs</h2>
+            <p class="text-neutral text-sm"><span id="available-jobs-count">0</span> jobs</p>
+        </div>
 
         <div>
             <button id="all-btn" class="btn btn-soft btn-primary" onclick="toggleButton('all-btn')">All</button>
@@ -47,9 +50,8 @@
 
     </section>
 
-    <section id="filter-content">
-
-    </section>
+    <section id="interview-content"></section>
+    <section id="rejected-content"></section>
 
     <section id="all-jobs" class="hidden">
         <!-- Job 1 -->
