@@ -14,7 +14,7 @@ const rejectedBtn = document.getElementById("rejected-btn");
 
 const allJobs = document.getElementById("all-jobs");
 const jobsCount = document.getElementById("available-jobs-count");
-const mainContent = document.getElementById("all-jobs");
+const mainContent = document.getElementById("main");
 const interviewContent = document.getElementById("interview-content");
 const rejectedContent = document.getElementById("rejected-content");
 
@@ -22,19 +22,17 @@ function totalCount() {
     total.innerText = allJobs.children.length;
     interview.innerText = interviewList.length;
     rejected.innerText = rejectedList.length;
+    jobsCount.innerText = allJobs.children.length;
 }
 totalCount();
 
 function toggleButton(id) {
-    console.log(id)
-
     allBtn.classList.remove("bg-blue-500", "text-white");
     interviewBtn.classList.remove("bg-blue-500", "text-white");
     rejectedBtn.classList.remove("bg-blue-500", "text-white");
 
     if (id === "all-btn") {
         allBtn.classList.add("bg-blue-500", "text-white");
-        jobsCount.innerText = allJobs.children.length;
         interviewContent.classList.add("hidden");
         rejectedContent.classList.add("hidden");
         allJobs.classList.remove("hidden");
@@ -155,3 +153,11 @@ function renderRejectedList() {
         rejectedContent.appendChild(jobElement);
     }
 }
+
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("delete")) {
+        const parentNode = event.target.parentNode.parentNode;
+        parentNode.remove();
+        totalCount();
+    }
+});
