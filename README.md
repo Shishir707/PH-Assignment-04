@@ -1,4 +1,4 @@
-# 🚀 
+# 🚀 My Asssignment Answer
 
 ### **1. What is the difference between getElementById, getElementsByClassName, and querySelector / querySelectorAll?**
 
@@ -35,4 +35,5 @@
 
   when we use preventDefault() means it stops default browser behavior.
   when we use stopPropagation() means it stops event bubbling only get that element not parent or others.
+
 
